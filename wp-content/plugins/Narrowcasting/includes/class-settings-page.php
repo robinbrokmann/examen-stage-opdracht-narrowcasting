@@ -75,7 +75,6 @@ class Settings_Page {
 		$this->plugin_name = 'settings-page';
 
 		$this->load_dependencies();
-		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 
@@ -105,11 +104,6 @@ class Settings_Page {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-settings-page-loader.php';
 
-		/**
-		 * The class responsible for defining internationalization functionality
-		 * of the plugin.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-settings-page-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
@@ -126,22 +120,6 @@ class Settings_Page {
 
 	}
 
-	/**
-	 * Define the locale for this plugin for internationalization.
-	 *
-	 * Uses the Settings_Page_i18n class in order to set the domain and to register the hook
-	 * with WordPress.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 */
-	private function set_locale() {
-
-		$plugin_i18n = new Settings_Page_i18n();
-
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
-	}
 
 	/**
 	 * Register all of the hooks related to the admin area functionality
