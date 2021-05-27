@@ -115,7 +115,7 @@ class Settings_Page_Admin {
 	public function settingsPageSettingsMessages($error_message){
 		switch ($error_message) {
 				case '1':
-						$message = __( 'There was an error adding this setting. Please try again.  If this persists, shoot us an email.', 'my-text-domain' );                 $err_code = esc_attr( 'settings_page_example_setting' );                 $setting_field = 'settings_page_example_setting';                 
+						$message = __( 'There was an error adding this setting. Please try again.  If this persists, shoot us an email.', 'my-text-domain' );                 $err_code = esc_attr( 'settings_page_example_setting' );                 $setting_field = 'settings_page_example_setting';
 						break;
 		}
 		$type = 'error';
@@ -154,8 +154,8 @@ class Settings_Page_Admin {
 							'wp_data' => 'option'
 					);
 		add_settings_field(
-			'settings_page_example_setting',
-			'Example Setting',
+			'MakeScreenSettings',
+			'Geef uw scherm een naam',
 			array( $this, 'settings_page_render_settings_field' ),
 			'settings_page_general_settings',
 			'settings_page_general_section',
@@ -165,12 +165,12 @@ class Settings_Page_Admin {
 
 		register_setting(
 						'settings_page_general_settings',
-						'settings_page_example_setting'
+						'MakeScreenSettings'
 						);
 
 	}
 	public function settings_page_display_general_account() {
-		echo '<p>These settings apply to all Plugin Name functionality.</p>';
+		echo '<p>Maak hier uw scherm aan.</p>';
 	} 
 	public function settings_page_render_settings_field($args) {
 
@@ -190,18 +190,10 @@ class Settings_Page_Admin {
 							$step = (isset($args['step'])) ? 'step="'.$args['step'].'"' : '';
 							$min = (isset($args['min'])) ? 'min="'.$args['min'].'"' : '';
 							$max = (isset($args['max'])) ? 'max="'.$args['max'].'"' : '';
-							if(isset($args['disabled'])){
-									// hide the actual input bc if it was just a disabled input the info saved in the database would be wrong - bc it would pass empty values and wipe the actual information
-									echo $prependStart.'<input type="'.$args['subtype'].'" id="'.$args['id'].'_disabled" '.$step.' '.$max.' '.$min.' name="'.$args['name'].'_disabled" size="40" disabled value="' . esc_attr($value) . '" /><input type="hidden" id="'.$args['id'].'" '.$step.' '.$max.' '.$min.' name="'.$args['name'].'" size="40" value="' . esc_attr($value) . '" />'.$prependEnd;
-							} else {
+
 									echo $prependStart.'<input type="'.$args['subtype'].'" id="'.$args['id'].'" "'.$args['required'].'" '.$step.' '.$max.' '.$min.' name="'.$args['name'].'" size="40" value="' . esc_attr($value) . '" />'.$prependEnd;
 							}
-							/*<input required="required" '.$disabled.' type="number" step="any" id="'.$this->plugin_name.'_cost2" name="'.$this->plugin_name.'_cost2" value="' . esc_attr( $cost ) . '" size="25" /><input type="hidden" id="'.$this->plugin_name.'_cost" step="any" name="'.$this->plugin_name.'_cost" value="' . esc_attr( $cost ) . '" />*/
 
-					} else {
-							$checked = ($value) ? 'checked' : '';
-							echo '<input type="'.$args['subtype'].'" id="'.$args['id'].'" "'.$args['required'].'" name="'.$args['name'].'" size="40" value="1" '.$checked.' />';
-					}
 					break;
 			default:
 					# code...
