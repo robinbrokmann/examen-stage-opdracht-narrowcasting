@@ -3,7 +3,6 @@
 /**
  * Register all actions and filters for the plugin
  *
- * @link       https://www.wplauncher.com
  * @since      1.0.0
  *
  * @package    Settings_Page
@@ -16,10 +15,6 @@
  * Maintain a list of all hooks that are registered throughout
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
- *
- * @package    Settings_Page
- * @subpackage Settings_Page/includes
- * @author     Ben Shadle <benshadle@gmail.com>
  */
 class Settings_Page_Loader {
 
