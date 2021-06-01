@@ -75,8 +75,6 @@ class Settings_Page_Admin {
 	public function enqueue_scripts() {
 
 		/**
-		 * This function is provided for demonstration purposes only.
-		 *
 		 * An instance of this class should be passed to the run() function
 		 * defined in Settings_Page_Loader as all of the hooks are defined
 		 * in that particular class.
@@ -91,28 +89,38 @@ class Settings_Page_Admin {
 	}
 	public function addPluginAdminMenu() {
 		//add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position );
-		add_menu_page(  $this->plugin_name, 'Narrowcasting', 'administrator', $this->plugin_name, array( $this, 'displayPluginAdminSettings' ), 'dashicons-chart-area', 26 );
+		add_menu_page(  $this->plugin_name, 'Narrowcasting', 'administrator', $this->plugin_name, array( $this, 'PluginAdminScreenSettings' ), 'dashicons-format-video', 26 );
 		
 		//add_submenu_page( '$parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function );
-		add_submenu_page( $this->plugin_name, 'Narrowcasting', 'Schermen', 'administrator', $this->plugin_name.'-settings', array( $this, 'displayPluginAdminSettings' ));
+		add_submenu_page( $this->plugin_name, 'Narrowcasting', 'Schermen', 'administrator', $this->plugin_name.'-settings', array( $this, 'PluginAdminScreenSettings' ));
 
         //add_submenu_page( '$parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function );
-		add_submenu_page( $this->plugin_name, 'Narrowcasting', 'Slides', 'administrator', $this->plugin_name.'-settings', array( $this, 'displayPluginAdminSettings' ));
+		add_submenu_page( $this->plugin_name, 'Narrowcasting', 'Slides', 'administrator', $this->plugin_name.'-settings', array( $this, 'PluginAdminSlideSettings' ));
 
 	}
-	public function displayPluginAdminDashboard() {
-		require_once 'partials/'.$this->plugin_name.'-admin-display.php';
-  }
-	public function displayPluginAdminSettings() {
+	public function PluginAdminScreenSettings() {
 		// set this var to be used in the settings-display view
 		$active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'general';
 		if(isset($_GET['error_message'])){
 				add_action('admin_notices', array($this,'settingsPageSettingsMessages'));
 				do_action( 'admin_notices', $_GET['error_message'] );
 		}
-		require_once 'partials/'.$this->plugin_name.'-admin-settings-display.php';
+		require_once 'partials/'.$this->plugin_name.'-admin-screen-settings.php';
+
 	}
+
+    public function PluginAdminSlideSettings()
+    {
+        // set this var to be used in the settings-display view
+        $active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'general';
+        if (isset($_GET['error_message'])) {
+            add_action('admin_notices', array($this, 'settingsPageSettingsMessages'));
+            do_action('admin_notices', $_GET['error_message']);
+        }
+        require_once 'partials/' . $this->plugin_name . '-admin-slide-settings.php';
+    }
 	public function settingsPageSettingsMessages($error_message){
+
 		switch ($error_message) {
 				case '1':
 						$message = __( 'There was an error adding this setting. Please try again.  If this persists, shoot us an email.', 'my-text-domain' );                 $err_code = esc_attr( 'settings_page_example_setting' );                 $setting_field = 'settings_page_example_setting';
@@ -190,7 +198,6 @@ class Settings_Page_Admin {
 							$step = (isset($args['step'])) ? 'step="'.$args['step'].'"' : '';
 							$min = (isset($args['min'])) ? 'min="'.$args['min'].'"' : '';
 							$max = (isset($args['max'])) ? 'max="'.$args['max'].'"' : '';
-
 									echo $prependStart.'<input type="'.$args['subtype'].'" id="'.$args['id'].'" "'.$args['required'].'" '.$step.' '.$max.' '.$min.' name="'.$args['name'].'" size="40" value="' . esc_attr($value) . '" />'.$prependEnd;
 							}
 
@@ -201,3 +208,4 @@ class Settings_Page_Admin {
 		}
 	}
 }
++

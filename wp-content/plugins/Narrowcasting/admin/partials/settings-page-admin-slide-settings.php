@@ -11,7 +11,6 @@
  * @subpackage Narrowcasting/admin/partials
  */
 ?>
-<!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div class="wrap">
 		        <div id="icon-themes" class="icon32"></div>  
 		        <h2>Narrowcasting</h2>
