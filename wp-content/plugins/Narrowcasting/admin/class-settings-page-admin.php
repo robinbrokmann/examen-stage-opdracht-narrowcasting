@@ -92,10 +92,10 @@ class Settings_Page_Admin {
 		add_menu_page(  $this->plugin_name, 'Narrowcasting', 'administrator', $this->plugin_name, array( $this, 'PluginAdminScreenSettings' ), 'dashicons-format-video', 26 );
 		
 		//add_submenu_page( '$parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function );
-		add_submenu_page( $this->plugin_name, 'Narrowcasting', 'Schermen', 'administrator', $this->plugin_name.'-settings', array( $this, 'PluginAdminScreenSettings' ));
+		add_submenu_page( $this->plugin_name, 'Narrowcasting', 'Schermen', 'administrator', $this->plugin_name, array( $this, 'PluginAdminScreenSettings' ));
 
         //add_submenu_page( '$parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function );
-	//	add_submenu_page( $this->plugin_name, 'Narrowcasting', 'Slides', 'administrator', $this->plugin_name.'-settings', array( $this, 'PluginAdminSlideSettings' ));
+		add_submenu_page( $this->plugin_name, 'Narrowcasting', 'Slides', 'administrator', $this->plugin_name.'-settings', array( $this, 'PluginAdminSlideSettings' ));
 
 	}
 	public function PluginAdminScreenSettings() {
@@ -109,16 +109,18 @@ class Settings_Page_Admin {
 
 	}
 
- /**  public function PluginAdminSlideSettings()
+   public function PluginAdminSlideSettings()
     {
         // set this var to be used in the settings-display view
-        $active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'general';
+        $active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'slide';
         if (isset($_GET['error_message'])) {
             add_action('admin_notices', array($this, 'settingsPageSettingsMessages'));
             do_action('admin_notices', $_GET['error_message']);
         }
         require_once 'partials/' . $this->plugin_name . '-admin-slide-settings.php';
- }*/
+ }
+
+
 	public function settingsPageSettingsMessages($error_message){
 
 		switch ($error_message) {
@@ -326,6 +328,119 @@ class Settings_Page_Admin {
         );
 
 
+        //slide settings
+
+
+        add_settings_section(
+        // ID used to identify this section and with which to register options
+            'settings_page_slide_section',
+            // Title to be displayed on the administration page
+            '',
+            // Callback used to render the description of the section
+            array( $this, 'settings_page_display_slide_account' ),
+            // Page on which to add this section of options
+            'settings_page_slide_settings'
+        );
+        unset($args);
+        $args = array (
+            'type'      => 'input',
+            'subtype'   => 'text',
+            'id'    => 'settings_page_example_setting',
+            'name'      => 'settings_page_example_setting',
+            'required' => 'true',
+            'get_options_list' => '',
+            'value_type'=>'normal',
+            'wp_data' => 'option'
+        );
+
+        add_settings_field(
+            'SlideImage',
+            'Selecteer een afbeelding voor de slide',
+            array( $this, 'settings_page_render_settings_field' ),
+            'settings_page_slide_settings',
+            'settings_page_slide_section',
+            $args
+        );
+
+
+        register_setting(
+            'settings_page_slide_settings',
+            'SlideImage'
+        );
+
+        add_settings_section(
+        // ID used to identify this section and with which to register options
+            'settings_page_slide_section',
+            // Title to be displayed on the administration page
+            '',
+            // Callback used to render the description of the section
+            array( $this, 'settings_page_display_slide_account' ),
+            // Page on which to add this section of options
+            'settings_page_slide_settings'
+        );
+        unset($args);
+        $args = array (
+            'type'      => 'input',
+            'subtype'   => 'text',
+            'id'    => 'settings_page_example_setting',
+            'name'      => 'settings_page_example_setting',
+            'required' => 'true',
+            'get_options_list' => '',
+            'value_type'=>'normal',
+            'wp_data' => 'option'
+        );
+
+        add_settings_field(
+            'SlideText',
+            'voer hier de tekst in voor de slide',
+            array( $this, 'settings_page_render_settings_field' ),
+            'settings_page_slide_settings',
+            'settings_page_slide_section',
+            $args
+        );
+
+
+        register_setting(
+            'settings_page_slide_settings',
+            'SlideText'
+        );
+
+        add_settings_section(
+        // ID used to identify this section and with which to register options
+            'settings_page_slide_section',
+            // Title to be displayed on the administration page
+            '',
+            // Callback used to render the description of the section
+            array( $this, 'settings_page_display_slide_account' ),
+            // Page on which to add this section of options
+            'settings_page_slide_settings'
+        );
+        unset($args);
+        $args = array (
+            'type'      => 'input',
+            'subtype'   => 'text',
+            'id'    => 'settings_page_example_setting',
+            'name'      => 'settings_page_example_setting',
+            'required' => 'true',
+            'get_options_list' => '',
+            'value_type'=>'normal',
+            'wp_data' => 'option'
+        );
+
+        add_settings_field(
+            'SlideTime',
+            'pas hier de slide snelheid aan',
+            array( $this, 'settings_page_render_settings_field' ),
+            'settings_page_slide_settings',
+            'settings_page_slide_section',
+            $args
+        );
+
+
+        register_setting(
+            'settings_page_slide_settings',
+            'SlideTime'
+        );
 
 	}
 	public function settings_page_display_general_account() {
@@ -339,9 +454,9 @@ class Settings_Page_Admin {
 			$wp_data_value = get_post_meta($args['post_id'], $args['name'], true );
 		}
 
-		switch ($args['type']) {
+		switch ($args['subtype']) {
 
-			case 'input':
+			case 'text':
 					$value = ($args['value_type'] == 'serialized') ? serialize($wp_data_value) : $wp_data_value;
 					if($args['subtype'] != 'checkbox'){
 							$prependStart = (isset($args['prepend_value'])) ? '<div class="input-prepend"> <span class="add-on">'.$args['prepend_value'].'</span>' : '';
@@ -351,12 +466,43 @@ class Settings_Page_Admin {
 							$max = (isset($args['max'])) ? 'max="'.$args['max'].'"' : '';
 									echo $prependStart.'<input type="'.$args['subtype'].'" id="'.$args['id'].'" "'.$args['required'].'" '.$step.' '.$max.' '.$min.' name="'.$args['name'].'" size="40" value="' . esc_attr($value) . '" />'.$prependEnd;
 							}
-
 					break;
 
 			default:
 					# code...
 					break;
 		}
+
 	}
+
+    public function settings_page_display_slide_account() {
+        echo '<p>Maak hier uw Slide aan.</p>';
+    }
+    public function settings_page_render_slide_field($args) {
+
+        if($args['wp_data'] == 'option'){
+            $wp_data_value = get_option($args['name']);
+        } elseif($args['wp_data'] == 'post_meta'){
+            $wp_data_value = get_post_meta($args['post_id'], $args['name'], true );
+        }
+
+        switch ($args['subtype']) {
+
+            case 'text':
+                $value = ($args['value_type'] == 'serialized') ? serialize($wp_data_value) : $wp_data_value;
+                if($args['subtype'] != 'checkbox'){
+                    $prependStart = (isset($args['prepend_value'])) ? '<div class="input-prepend"> <span class="add-on">'.$args['prepend_value'].'</span>' : '';
+                    $prependEnd = (isset($args['prepend_value'])) ? '</div>' : '';
+                    $step = (isset($args['step'])) ? 'step="'.$args['step'].'"' : '';
+                    $min = (isset($args['min'])) ? 'min="'.$args['min'].'"' : '';
+                    $max = (isset($args['max'])) ? 'max="'.$args['max'].'"' : '';
+                    echo $prependStart.'<input type="'.$args['subtype'].'" id="'.$args['id'].'" "'.$args['required'].'" '.$step.' '.$max.' '.$min.' name="'.$args['name'].'" size="40" value="' . esc_attr($value) . '" />'.$prependEnd;
+                }
+                break;
+
+            default:
+                # code...
+                break;
+        }
+    }
 }
