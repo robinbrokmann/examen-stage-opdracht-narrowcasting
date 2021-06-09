@@ -95,7 +95,7 @@ class Settings_Page_Admin {
 		add_submenu_page( $this->plugin_name, 'Narrowcasting', 'Schermen', 'administrator', $this->plugin_name.'-settings', array( $this, 'PluginAdminScreenSettings' ));
 
         //add_submenu_page( '$parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function );
-		add_submenu_page( $this->plugin_name, 'Narrowcasting', 'Slides', 'administrator', $this->plugin_name.'-settings', array( $this, 'PluginAdminSlideSettings' ));
+	//	add_submenu_page( $this->plugin_name, 'Narrowcasting', 'Slides', 'administrator', $this->plugin_name.'-settings', array( $this, 'PluginAdminSlideSettings' ));
 
 	}
 	public function PluginAdminScreenSettings() {
@@ -109,7 +109,7 @@ class Settings_Page_Admin {
 
 	}
 
-    public function PluginAdminSlideSettings()
+ /**  public function PluginAdminSlideSettings()
     {
         // set this var to be used in the settings-display view
         $active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'general';
@@ -118,7 +118,7 @@ class Settings_Page_Admin {
             do_action('admin_notices', $_GET['error_message']);
         }
         require_once 'partials/' . $this->plugin_name . '-admin-slide-settings.php';
-    }
+ }*/
 	public function settingsPageSettingsMessages($error_message){
 
 		switch ($error_message) {
@@ -142,11 +142,11 @@ class Settings_Page_Admin {
 		 */     
 		add_settings_section(
 			// ID used to identify this section and with which to register options
-			'settings_page_general_section', 
+			'settings_page_general_section',
 			// Title to be displayed on the administration page
 			'',  
 			// Callback used to render the description of the section
-				array( $this, 'settings_page_display_general_account' ),    
+				array( $this, 'settings_page_display_general_account' ),
 			// Page on which to add this section of options
 			'settings_page_general_settings'                   
 		);
@@ -161,6 +161,7 @@ class Settings_Page_Admin {
 							'value_type'=>'normal',
 							'wp_data' => 'option'
 					);
+
 		add_settings_field(
 			'MakeScreenSettings',
 			'Geef uw scherm een naam',
@@ -176,10 +177,160 @@ class Settings_Page_Admin {
 						'MakeScreenSettings'
 						);
 
+        add_settings_section(
+        // ID used to identify this section and with which to register options
+            'settings_page_general_section',
+            // Title to be displayed on the administration page
+            '',
+            // Callback used to render the description of the section
+            array( $this, 'settings_page_display_general_account' ),
+            // Page on which to add this section of options
+            'settings_page_general_settings'
+        );
+        unset($args);
+        $args = array (
+            'type'      => 'input',
+            'subtype'   => 'text',
+            'id'    => 'settings_page_example_setting',
+            'name'      => 'settings_page_example_setting',
+            'required' => 'true',
+            'get_options_list' => '',
+            'value_type'=>'normal',
+            'wp_data' => 'option'
+        );
+
+        add_settings_field(
+            'ScreenBackgroundSettings',
+            'Geef uw scherm een achtergrondkleur',
+            array( $this, 'settings_page_render_settings_field' ),
+            'settings_page_general_settings',
+            'settings_page_general_section',
+            $args
+        );
+
+
+        register_setting(
+            'settings_page_general_settings',
+            'ScreenBackgroundSettings'
+        );
+
+        add_settings_section(
+        // ID used to identify this section and with which to register options
+            'settings_page_general_section',
+            // Title to be displayed on the administration page
+            '',
+            // Callback used to render the description of the section
+            array( $this, 'settings_page_display_general_account' ),
+            // Page on which to add this section of options
+            'settings_page_general_settings'
+        );
+        unset($args);
+        $args = array (
+            'type'      => 'input',
+            'subtype'   => 'text',
+            'id'    => 'settings_page_example_setting',
+            'name'      => 'settings_page_example_setting',
+            'required' => 'true',
+            'get_options_list' => '',
+            'value_type'=>'normal',
+            'wp_data' => 'option'
+        );
+
+        add_settings_field(
+            'SlideSelectorSettings',
+            'Selecteer uw slides voor de pagina',
+            array( $this, 'settings_page_render_settings_field' ),
+            'settings_page_general_settings',
+            'settings_page_general_section',
+            $args
+        );
+
+
+        register_setting(
+            'settings_page_general_settings',
+            'SlideSelectorSettings'
+        );
+
+        add_settings_section(
+        // ID used to identify this section and with which to register options
+            'settings_page_general_section',
+            // Title to be displayed on the administration page
+            '',
+            // Callback used to render the description of the section
+            array( $this, 'settings_page_display_general_account' ),
+            // Page on which to add this section of options
+            'settings_page_general_settings'
+        );
+        unset($args);
+        $args = array (
+            'type'      => 'input',
+            'subtype'   => 'text',
+            'id'    => 'settings_page_example_setting',
+            'name'      => 'settings_page_example_setting',
+            'required' => 'true',
+            'get_options_list' => '',
+            'value_type'=>'normal',
+            'wp_data' => 'option'
+        );
+
+        add_settings_field(
+            'SlideHeightSettings',
+            'Kies de hoogte van de slide',
+            array( $this, 'settings_page_render_settings_field' ),
+            'settings_page_general_settings',
+            'settings_page_general_section',
+            $args
+        );
+
+
+        register_setting(
+            'settings_page_general_settings',
+            'SlideHeightSettings'
+        );
+
+        add_settings_section(
+        // ID used to identify this section and with which to register options
+            'settings_page_general_section',
+            // Title to be displayed on the administration page
+            '',
+            // Callback used to render the description of the section
+            array( $this, 'settings_page_display_general_account' ),
+            // Page on which to add this section of options
+            'settings_page_general_settings'
+        );
+        unset($args);
+        $args = array (
+            'type'      => 'input',
+            'subtype'   => 'text',
+            'id'    => 'settings_page_example_setting',
+            'name'      => 'settings_page_example_setting',
+            'required' => 'true',
+            'get_options_list' => '',
+            'value_type'=>'normal',
+            'wp_data' => 'option'
+        );
+
+        add_settings_field(
+            'SlideWidthSettings',
+            'Kies de breedte van de slide',
+            array( $this, 'settings_page_render_settings_field' ),
+            'settings_page_general_settings',
+            'settings_page_general_section',
+            $args
+        );
+
+
+        register_setting(
+            'settings_page_general_settings',
+            'SlideWidthSettings'
+        );
+
+
+
 	}
 	public function settings_page_display_general_account() {
 		echo '<p>Maak hier uw scherm aan.</p>';
-	} 
+	}
 	public function settings_page_render_settings_field($args) {
 
 		if($args['wp_data'] == 'option'){
@@ -202,10 +353,10 @@ class Settings_Page_Admin {
 							}
 
 					break;
+
 			default:
 					# code...
 					break;
 		}
 	}
 }
-+

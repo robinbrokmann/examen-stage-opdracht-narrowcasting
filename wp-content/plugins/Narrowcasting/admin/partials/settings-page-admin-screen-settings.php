@@ -19,7 +19,7 @@
 		        <form method="POST" action="options.php">  
 		            <?php 
 		                settings_fields( 'settings_page_general_settings' );
-		                do_settings_sections( 'settings_page_general_settings' ); 
+		                do_settings_sections( 'settings_page_general_settings' );
 		            ?>             
 		            <?php submit_button(); ?>  
 		        </form> 
