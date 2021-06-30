@@ -56,5 +56,44 @@ class Settings_Page_Public {
 	 * @since    1.0.0
 	 */
 
+    public function enqueue_styles()
+    {
+
+        /**
+         *
+         * An instance of this class should be passed to the run() function
+         * defined in Settings_Page_Loader as all of the hooks are defined
+         * in that particular class.
+         *
+         * The Settings_Page_Loader will then create the relationship
+         * between the defined hooks and the functions defined in this
+         * class.
+         */
+
+        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/settings-page-admin.css', array(), $this->version, 'all');
+
+    }
+
+    /**
+     * Register the JavaScript for the admin area.
+     *
+     * @since    1.0.0
+     */
+    public function enqueue_scripts()
+    {
+
+        /**
+         * An instance of this class should be passed to the run() function
+         * defined in Settings_Page_Loader as all of the hooks are defined
+         * in that particular class.
+         *
+         * The Settings_Page_Loader will then create the relationship
+         * between the defined hooks and the functions defined in this
+         * class.
+         */
+
+        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/settings-page-admin.js', array('jquery'), $this->version, false);
+
+    }
 
 }
