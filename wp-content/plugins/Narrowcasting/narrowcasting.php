@@ -56,6 +56,9 @@ add_action('init', 'custom_post_type', 0);
 
 
 
+
+
+
 // Maakt verbinding met de template
 
 add_filter( 'template_include', 'my_plugin_templates' );
