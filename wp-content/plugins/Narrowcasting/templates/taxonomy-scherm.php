@@ -10,9 +10,11 @@
 
     <?php wp_head(); ?>
 </head>
-<body style="background: #3b3b3b;">
-
+<body>
+<div id="carousel" class="carousel slide" data-ride="carousel" data-interval="10000" data-transitionduration="500">
+    <div class='carousel-inner' style="border-radius: 8px;">
 <?php
+$i=0;
 //haalt de data uit de post eerst nog afbeeldingen
 while ( have_posts() ) : the_post();
     $content = get_the_content();
@@ -29,19 +31,20 @@ while ( have_posts() ) : the_post();
 
     <!--zet de afbeeldingen in een slide. -->
 
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" data-interval="10000" data-transitionduration="500">
-        <div class='carousel-inner' style="border-radius: 8px;">
-            <?php $i=0; foreach ( $imgs as $img): ?>
+
+            <?php  foreach ( $imgs as $img): ?>
                 <?php if ($i==0) {$set_ = 'active'; } else {$set_ = ''; } ?>
                 <div class='carousel-item <?php echo $set_; ?>'>
-                    <img src='<?php echo $img->getAttribute('src'); ?>' class='d-block w-100'>
+                    <img src='<?php echo $img->getAttribute('src'); ?>' class='d-block h-100 w-100'>
                 </div>
                 <?php $i++; endforeach ?>
-        </div>
-    </div>
+
 <?php
 endwhile;
 ?>
+
+    </div>
+</div>
 </body>
 </html>
 
