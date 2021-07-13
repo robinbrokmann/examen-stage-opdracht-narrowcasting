@@ -52,11 +52,11 @@
                 <div class='carousel-item <?php echo $set_; ?>' style="position: relative;">
                     <img src='<?php echo $img->getAttribute('src'); ?>' class='d-block w-100' style="position: fixed;">
                     <div class="text-box"
-                         style=" background: rgba(26,26,26,0.23); width: 700px; z-index:100;  border-radius: 10px; position: fixed;  top: 200px; right: 100px; ">
-                        <div class="title" style="color: #535353; font-size: 50px; text-align: center ">
+                         style=" background: rgba(73,72,72,0.23); width: 700px; z-index:100;  border-radius: 10px; position: fixed;  top: 200px; right: 100px;">
+                        <div class="title" style="color: #161616; font-size: 50px; text-align: center; font-family: SansSerif ">
                             <?php echo get_the_title() ?>
                         </div>
-                        <div class="text" style="color: #535353; text-align: center;">
+                        <div class="text" style="color: #161616; text-align: center; font-family: sans-serif;">
                             <?php echo $text; ?>
                         </div>
                     </div>
