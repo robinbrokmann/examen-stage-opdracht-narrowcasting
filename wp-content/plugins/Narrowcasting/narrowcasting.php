@@ -2,18 +2,17 @@
 
 /*
 Plugin Name:Narrowcasting plug-in
-Description: Narrowcasting
-Version: 1.0
+Description: Narrowcasting systeem creert de mogelijkheden om afbeeldingen en informatie op een scherm te zetten.
+Version: 1.3
 Author: Robin Brokmann
 */
 
-//hook into the init action and call create_topics_nonhierarchical_taxonomy when it fires
 
 add_action( 'init', 'create_topics_nonhierarchical_taxonomy', 0 );
 
 function create_topics_nonhierarchical_taxonomy() {
 
-// Labels part for the GUI
+// creeert de labels voor in Wordpress
 
     $labels = array(
         'name' => _x( 'schermen', 'taxonomy general name' ),
@@ -32,7 +31,7 @@ function create_topics_nonhierarchical_taxonomy() {
         'menu_name' => __( 'Schermen' ),
     );
 
-// Now register the non-hierarchical taxonomy like tag
+// registreerd de taxonomy
 
     register_taxonomy('scherm','schermen',array(
         'hierarchical' => false,
@@ -46,6 +45,7 @@ function create_topics_nonhierarchical_taxonomy() {
     ));
 }
 
+//creeert de custom post type
 
 function custom_post_type()
 {
@@ -89,7 +89,6 @@ function custom_post_type()
 
 }
 
-// Hook into the 'init' action
 add_action('init', 'custom_post_type', 0);
 
 
@@ -98,7 +97,7 @@ add_action('init', 'custom_post_type', 0);
 
 
 
-// Maakt verbinding met de template
+// Maakt verbinding met de template in de plug-in map inplaatst van het thema
 
 add_filter( 'template_include', 'my_plugin_templates' );
 function my_plugin_templates( $template ) {

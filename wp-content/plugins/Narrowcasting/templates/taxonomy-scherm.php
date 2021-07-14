@@ -11,6 +11,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -20,7 +21,7 @@
     <div class='carousel-inner' style="border-radius: 8px;">
         <?php
         $i = 0;
-        //haalt de data uit de post eerst nog afbeeldingen
+        //haalt de data uit de post
         while (have_posts()) : the_post();
             $content = get_the_content();
             $text = get_the_content();
@@ -53,7 +54,8 @@
                     <img src='<?php echo $img->getAttribute('src'); ?>' class='d-block w-100' style="position: fixed;">
                     <div class="text-box"
                          style=" background: rgba(73,72,72,0.23); width: 700px; z-index:100;  border-radius: 10px; position: fixed;  top: 200px; right: 100px;">
-                        <div class="title" style="color: #161616; font-size: 50px; text-align: center; font-family: SansSerif ">
+                        <div class="title"
+                             style="color: #161616; font-size: 50px; text-align: center; font-family: SansSerif ">
                             <?php echo get_the_title() ?>
                         </div>
                         <div class="text" style="color: #161616; text-align: center; font-family: sans-serif;">
