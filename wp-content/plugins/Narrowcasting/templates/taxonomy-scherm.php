@@ -16,7 +16,7 @@
 
 </head>
 <body>
-<div id="carousel" class="carousel slide" data-ride="carousel" data-interval="10000" data-transitionduration="500">
+<div id="carousel" class="carousel slide" data-ride="carousel">
     <div class='carousel-inner' style="border-radius: 8px;">
         <?php
         $i = 0;
