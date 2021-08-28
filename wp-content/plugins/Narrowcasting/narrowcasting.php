@@ -69,7 +69,7 @@ function custom_post_type()
         'label' => __('Narrowcasting', 'text_domain'),
         'description' => __('Post Type voor Narrowcasting', 'text_domain'),
         'labels' => $labels,
-        'supports' => array('title', 'editor', 'author', 'category'),
+        'supports' => array('title', 'editor', 'author', 'category',),
         'taxonomies' => array('scherm'),
         'hierarchical' => true,
         'public' => true,
